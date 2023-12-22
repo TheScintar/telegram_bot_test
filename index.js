@@ -1,7 +1,7 @@
 const TelegramApi = require('node-telegram-bot-api')
 const {gameOptions, againOptions} = require("./options")
 
-const telegramToken = "6958435283:AAGiHiT6jhKJYsn4kWPdfcecD3NN3ymIqtg"
+const telegramToken = "6515702657:AAGfvbuj9UdX6kvd8sBAOsmNEbfgW7PCgYc"
 
 const bot = new TelegramApi(telegramToken, {polling: true})
 
@@ -43,10 +43,11 @@ const start = () => {
     bot.on("callback_query", async msg => {
         const data = msg.data;
         const chatId = msg.message.chat.id;
+        bot.sendMessage(chatId, `Ты выбрал цифру ${data}`)
         if(data === '/again'){
             return startGame(chatId)
         }
-        if(data === chats[chatId]) {
+        if(data == chats[chatId]) {
             return await bot.sendMessage(chatId, `Поздравляю, ты отгадал цифру ${chats[chatId]}`, againOptions)
         } else {
             console.log(data)
@@ -54,7 +55,7 @@ const start = () => {
             return bot.sendMessage(chatId, `К сожалению ты не угадал, я загадал ${chats[chatId]}`, againOptions)
         }
 
-        bot.sendMessage(chatId, `Ты выбрал цифру ${data}`)
+        
         console.log(msg)
     })
 }
