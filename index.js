@@ -8,6 +8,7 @@ const bot = new TelegramApi(telegramToken, {polling: true})
 const chats = {}
 
 
+
 const startGame = async (chatId) => {
             await bot.sendMessage(chatId, "Я загадал цифру от 0 до 9, угадай число, нуб")
             const randomNumber = Math.floor(Math.random() * 10)
@@ -23,6 +24,7 @@ const start = () => {
     ])
     
     bot.on("message", async msg => {
+        console.log(msg)
         const text = msg.text
         const chatId = msg.chat.id;
     
@@ -35,7 +37,13 @@ const start = () => {
     
         }
         if(text === '/game'){
+            const isMember = bot.getChatMember("@Anonymous_message1", chatId)
+            if(!isMember){
+                return bot.sendMessage(chatId, "Сначала подпишитесь на телеграм канал https://t.me/Anonymous_message1")
+            } else{
+            console.log(isMember)
             return startGame(chatId)
+        }
         }
        return bot.sendMessage(chatId, "Я тебя не понимаю")
     })
