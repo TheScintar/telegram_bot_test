@@ -43,7 +43,6 @@ const start = () => {
     bot.on("callback_query", async msg => {
         const data = msg.data;
         const chatId = msg.message.chat.id;
-        bot.sendMessage(chatId, `Ты выбрал цифру ${data}`)
         if(data === '/again'){
             return startGame(chatId)
         }
