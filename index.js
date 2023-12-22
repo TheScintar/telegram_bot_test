@@ -55,7 +55,6 @@ const start = () => {
             return bot.sendMessage(chatId, `К сожалению ты не угадал, я загадал ${chats[chatId]}`, againOptions)
         }
 
-        
         console.log(msg)
     })
 }
